@@ -21,9 +21,10 @@
                 "dijit/Tree",
                 "dojo/domReady!"], function (parser, Memory, Tree) {
 
-                     // your code goes here
-
-                     
+                    var myData = {};
+                    var treeModel = new Memory({data: myData});
+                    var myTree = new Tree({ model: treeModel}, 'myTree');
+                    myTree.startup();
 
 
                 })
