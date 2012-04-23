@@ -3,6 +3,7 @@
     <head>
         <title>Dojo Test</title>
 
+        <!--Source: http://dojotoolkit.org/documentation/tutorials/1.6/store_driven_tree/-->
 
         <link rel="stylesheet" media="screen" href="C:\projects\ledgerware_osh\wsgi\ledgerware\main\static\dojo-1.7.2-src/dojo/resources/dojo.css" />
         <link rel="stylesheet" media="screen" href="C:\projects\ledgerware_osh\wsgi\ledgerware\main\static\dojo-1.7.2-src/dijit/themes/claro/claro.css" />
@@ -18,14 +19,36 @@
         <script type="text/javascript">
             require(["dojo/parser",
                 "dojo/store/Memory",
+                "dojo/query",
                 "dijit/Tree",
-                "dojo/domReady!"], function (parser, Memory, Tree) {
+                "dojo/domReady!"], function (parser, Memory, query, Tree) {
 
-                    var myData = {};
-                    var treeModel = new Memory({data: myData});
-                    var myTree = new Tree({ model: treeModel}, 'myTree');
-                    myTree.startup();
+                    var myData = [
+                        { id: 0, name: "A", parent_id: null },
+                        { id: 1, name: "A1", parent_id: 0 },
+                        { id: 11, name: "A1.1", parent_id: 1 },
+                        { id: 12, name: "A1.2", parent_id: 1 },
+                        { id: 13, name: "A1.3", parent_id: 1 },
+                        { id: 2, name: "A2", parent_id: 0 }
+                    ];
 
+                    var treeModel = new Memory({ data: myData,
+                        mayHaveChildren: function (object) {
+                            return children = query({ parent_id: item.id });
+                        },                        
+                        getChildren: function (item, onComplete, onError) {
+                            query({ parent_id: item.id });
+                            onComplete(children);
+                        },
+                        getRoot: function(onItem, onError){
+                            this.get().then(onItem, onError);
+                        },
+                    });
+
+                    
+
+                    //                    var myTree = new Tree({ model: treeModel }, 'myTree');
+                    //                    myTree.startup();
 
                 })
         </script>
