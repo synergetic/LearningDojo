@@ -1,0 +1,31 @@
+<!DOCTYPE html />
+<html>
+    <head>
+        <title>Defining Modules</title>
+
+        <script data-dojo-config="async: true" src="js/lib/dojo/dojo.js"></script>
+        <script type="text/javascript">
+            var dojoConfig = {
+                baseUrl: "/js/",
+                tlmSiblingOfDojo: false,
+                packages: [
+                    { name: "dojo", location: "lib/dojo" },
+                    { name: "dijit", location: "lib/dijit" },
+                    { name: "dojox", location: "lib/dojox" },
+                    { name: "my", location: "my", main: "app" }
+                ]
+            };
+
+            require(["dojo/_base/declare", "dijit/_WidgetBase", "dijit/_TemplatedMixin"], function (declare, _WidgetBase, _TemplatedMixin) {
+                // "declare" holds the dojo declare function
+                // "_WidgetBase" holds the dijit _WidgetBase constructor
+                // "_TemplatedMixin" holds the dijit _TemplatedMixin constructor
+                // Do whatever you want with these modules here.
+            });
+        </script>
+
+    </head>
+
+    <body>
+    </body>
+</html>

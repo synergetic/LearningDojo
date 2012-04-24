@@ -32,25 +32,27 @@
                         { id: 2, name: "A2", parent_id: 0 }
                     ];
 
-                    var treeModel = new Memory({ data: myData,
-                        mayHaveChildren: function (object) {
-                            return children = query({ parent_id: item.id });
-                        },                        
+                    var treeModel = new Memory({ data: myData, idProperty: "id",
+                        mayHaveChildren: function (item) {
+                            return this.query({ parent_id: item.id }).length !== 0
+                        },
                         getChildren: function (item, onComplete, onError) {
-                            query({ parent_id: item.id });
+                            var children = this.query({ parent_id: item.id });
                             onComplete(children);
                         },
-                        getRoot: function(onItem, onError){
-                            this.get().then(onItem, onError);
+                        getRoot: function (onItem, onError) {
+                            var root = this.get(0);
+                            onItem(root);
                         },
+                        getLabel: function (item) {
+                            return item.name;
+                        }
                     });
 
-                    
+                    var myTree = new Tree({ model: treeModel }, 'myTree');
+                    myTree.startup();
 
-                    //                    var myTree = new Tree({ model: treeModel }, 'myTree');
-                    //                    myTree.startup();
-
-                })
+                });
         </script>
     </head>
     <body class="claro">

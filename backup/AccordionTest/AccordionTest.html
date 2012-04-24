@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ledgerware</title>
+
+        <link rel="stylesheet" media="screen" href="../../ledgerware_osh/wsgi/ledgerware/main/static/dojo-1.7.2-src/dojo/resources/dojo.css" />
+        <link rel="stylesheet" media="screen" href="../../ledgerware_osh/wsgi/ledgerware/main/static/dojo-1.7.2-src/dijit/themes/claro/claro.css" />
+
+        <link rel="stylesheet" media="screen" href="AccordionTest.css" />
+
+        <script type="text/javascript">
+            var dojoConfig = (function () {
+                var base = location.href.split("/");
+                base.pop();
+                base = base.join("/");
+                return {
+                    async: true,
+                    tlmSiblingOfDojo: false,
+                    packages: [
+                    ]
+                };
+            })();
+        </script>
+        <script type="text/javascript" src="../../ledgerware_osh/wsgi/ledgerware/main/static/dojo-1.7.2-src/dojo/dojo.js" ></script>
+        <script type="text/javascript">
+            require(["dojo/parser",
+                "dojo/dom",
+	        "dijit/layout/ContentPane",
+                "dijit/layout/AccordionContainer",
+                "dojo/domReady!"], function (parser, dom, ContentPane) {
+                    parser.parse();
+                    var menuContainer = dijit.byId("menuContainer");
+                    menuContainer.addChild(new ContentPane({
+                        title: "Administration",
+                        content: '<div id="module_1_menus"></div>'
+                    }));
+
+                })
+        </script>
+        
+    </head>
+
+    <body class="claro">
+        <div id="menuContainer" data-dojo-type="dijit.layout.AccordionContainer">
+        </div>
+    </body>
+</html>
+
