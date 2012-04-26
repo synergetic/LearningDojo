@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dojo Test</title>
+
+
+        <link rel="stylesheet" media="screen" href="C:\projects\ledgerware_osh\wsgi\ledgerware\main\static\dojo-1.7.2-src/dojo/resources/dojo.css" />
+        <link rel="stylesheet" media="screen" href="C:\projects\ledgerware_osh\wsgi\ledgerware\main\static\dojo-1.7.2-src/dijit/themes/claro/claro.css" />
+        <link rel="stylesheet" href="DojoTest.css">
+        
+        <script>
+            var dojoConfig = {
+                async: true
+            };
+	</script>
+
+        <script type="text/javascript" src="C:\projects\ledgerware_osh\wsgi\ledgerware\main\static\dojo-1.7.2-src\dojo/dojo.js"></script>
+        <script type="text/javascript">
+            require(["dojo/parser",
+                "dojo/store/Memory",
+                "dijit/layout/ContentPane",
+                "dijit/layout/TabContainer",
+                "dojo/domReady!"], function (parser, Memory, ContentPane) {
+
+                    parser.parse();
+                    var tabContainer = dijit.byId("tabContainer");
+                    var contentPane = new ContentPane({
+                        title: "First Tab",
+                        closable: true
+                    });
+                    tabContainer.addChild(contentPane);
+                    tabContainer.selectChild(contentPane);
+                    //tabContainer.startup();
+
+                })
+        </script>
+    </head>
+    <body class="claro">
+
+		<div id ="tabContainer" data-dojo-type="dijit.layout.TabContainer" data-dojo-props="tabPosition: 'top'" style="height:100px;">
+		</div>
+
+    </body>
+</html>
